@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modelz;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-    //
+    protected $fillable = ['name', 'description'];
 }
