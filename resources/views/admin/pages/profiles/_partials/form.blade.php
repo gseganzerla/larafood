@@ -1,7 +1,7 @@
 @csrf
 
 @include('admin.includes.alerts')
-
+@csrf
 <div class="form-group">
     <label>* Nome:</label>
     <input type="text" class="form-control" name="name" placeholder="Nome:"
