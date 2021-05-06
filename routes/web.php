@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
+    // Routes Profiles
+    Route::resource('profiles', 'ACL\ProfileController');
+
     // Route Details Plan
     Route::delete('plans/{url}/details/{idDetail}', 'DetailPlanController@destroy')->name('details.plan.destroy');
     Route::get('plans/{url}/details/{idDetail}', 'DetailPlanController@show')->name('details.plan.show');
