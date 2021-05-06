@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
+    // Route Details Plan
+    Route::get('plans/{url}/details', 'DetailPlanController@index')->name('details.plan.index');
+
+    // Route Plans
     Route::any('plans/search', 'PlanController@search')->name('plans.search');
     Route::get('plans/create', 'PlanController@create')->name('plans.create');
     Route::put('plans/{url}', 'PlanController@update')->name('plans.update');
@@ -28,5 +32,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('plans', 'PlanController@index')->name('plans.index');
     Route::post('plans', 'PlanController@store')->name('plans.store');
 
+    // Home dashoard
     Route::get('', 'PlanController@create')->name('admin.index');
 });
