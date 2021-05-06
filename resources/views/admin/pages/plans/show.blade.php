@@ -17,12 +17,21 @@
                 <strong>Url: </strong> {{ $plan->url }}
             </li>
             <li>
-                <strong>Preço: </strong> R$ {{ number_format($plan->price, 2, ',', '.') }}
+                <strong>Preço: </strong> R$
+                {{ number_format($plan->price, 2, ',', '.') }}
             </li>
             <li>
                 <strong>Descrição: </strong> {{ $plan->description }}
             </li>
         </ul>
+
+        <form action="{{ route('plans.destroy', $plan->url) }}" method="POST">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-danger">DELETAR O PLANO {{ $plan->name }}</button>
+
+        </form>
     </div>
 </div>
 @endsection

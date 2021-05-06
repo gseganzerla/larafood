@@ -100,11 +100,19 @@ class PlanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $url
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($url)
     {
-        //
+        $plan = $this->repository->where('url', $url)->first();
+
+        if (!$plan) {
+            return redirect()->back();
+        }
+
+        $plan->delete();
+
+        return redirect()->route('plans.index');
     }
 }
