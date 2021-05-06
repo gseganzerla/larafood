@@ -20,6 +20,8 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     // Route Details Plan
+    Route::post('plans/{url}', 'DetailPlanController@store')->name('details.plan.store');
+    Route::get('plans/{url}/details/create', 'DetailPlanController@create')->name('details.plan.create');
     Route::get('plans/{url}/details', 'DetailPlanController@index')->name('details.plan.index');
 
     // Route Plans
