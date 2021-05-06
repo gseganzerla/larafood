@@ -24,8 +24,8 @@
                     @foreach ($plans as $plan)
                         <tr>
                             <td>{{ $plan->name }}</td>
-                            <td>{{ $plan->price }}</td>
-                            <td style="width=50px;"><a href="#" class="btn btn-warning">Ver</a></td>
+                            <td>R$ {{ number_format($plan->price, 2, ',', '.') }}</td>
+                            <td style="width=50px;"><a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning">Ver</a></td>
                         </tr>
                     @endforeach
                 </tbody>

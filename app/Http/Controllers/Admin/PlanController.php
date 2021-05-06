@@ -51,19 +51,27 @@ class PlanController extends Controller
         $data['url'] = Str::kebab($request->name);
 
         $this->repository->create($data);
-        
+
         return redirect()->route('plans.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  str  $url
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($url)
     {
-        //
+        $plan = $this->repository->where('url', $url)->first();
+
+        if (!$plan) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.plans.show', [
+            'plan' => $plan
+        ]);
     }
 
     /**
