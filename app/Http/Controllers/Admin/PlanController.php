@@ -11,7 +11,7 @@ class PlanController extends Controller
 {
     private $repository;
 
-    public function __construct(Plan $plan) 
+    public function __construct(Plan $plan)
     {
         $this->repository = $plan;
     }
@@ -46,7 +46,7 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUpdatePlan $request)
-    {   
+    {
         $this->repository->create($request->all());
 
         return redirect()->route('plans.index');
@@ -118,10 +118,19 @@ class PlanController extends Controller
      */
     public function destroy($url)
     {
-        $plan = $this->repository->where('url', $url)->first();
+        $plan = $this->repository
+            ->with('details')
+            ->where('url', $url)
+            ->first();
 
         if (!$plan) {
             return redirect()->back();
+        }
+
+        if ($plan->details->count() > 0) {
+            return redirect()
+            ->back()
+            ->with('error', 'Existem detalhes vinculados a esse plano');
         }
 
         $plan->delete();
@@ -129,7 +138,7 @@ class PlanController extends Controller
         return redirect()->route('plans.index');
     }
 
-    public function search(Request $request) 
+    public function search(Request $request)
     {
         $filters = $request->except('_token');
         $plans = $this->repository->search($request->filter);
