@@ -8,7 +8,7 @@
     <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}">Planos</a></li>
 </ol>
 
-<h1>Planos <a href="{{ route('plans.create') }}" class="btn btn-dark">Add</a></h1>
+<h1>Planos <a href="{{ route('plans.create') }}" class="btn btn-dark"><i class="fas fa-plus"></i></a></h1>
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
             @csrf
             <input type="text" class="form-control" name="filter" planceholder="Nome"
                 value="{{ $filters['filter'] ?? '' }}">
-            <button type="submit" class="btn btn-dark">Filtrar</button>
+            <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
         </form>
     </div>
     <div class="card-body">
