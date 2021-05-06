@@ -8,11 +8,11 @@ use App\Models\Plan;
 use Illuminate\Http\Request;
 
 class DetailPlanController extends Controller
-{   
+{
     private $repository;
     private $plan;
 
-    public function __construct(DetailPlan $detailPlan, Plan $plan) 
+    public function __construct(DetailPlan $detailPlan, Plan $plan)
     {
         $this->repository = $detailPlan;
         $this->plan = $plan;
@@ -24,7 +24,7 @@ class DetailPlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($urlPlan)
-    {   
+    {
         $plan = $this->plan->where('url', $urlPlan)->first();
 
         if (!$plan) {
@@ -38,7 +38,6 @@ class DetailPlanController extends Controller
             'plan' => $plan,
             'details' => $details
         ]);
-
     }
 
     /**
@@ -99,9 +98,19 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($urlPlan, $idDetail)
     {
-        //
+        $plan = $this->plan->where('url', $urlPlan)->first();
+        $detail = $this->repository->find($idDetail);
+
+        if (!$plan || !$detail) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.plans.details.edit', [
+            'plan' => $plan,
+            'detail' => $detail
+        ]);
     }
 
     /**
@@ -111,9 +120,19 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $urlPlan, $idDetail)
     {
-        //
+        $plan = $this->plan->where('url', $urlPlan)->first();
+        $detail = $this->repository->find($idDetail);
+
+        if (!$plan || !$detail) {
+            return redirect()->back();
+        }
+
+        $detail->update($request->all());
+
+        return redirect()->route('details.plan.index', $plan->url);
+
     }
 
     /**
