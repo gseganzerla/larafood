@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Perfis')
+@section('title', "Permissões do perfil {$profile->name}")
 
 @section('content_header')
 <ol class="breadcrumb">
@@ -8,7 +8,9 @@
     <li class="breadcrumb-item active"><a href="{{ route('profiles.index') }}">Perfis</a></li>
 </ol>
 
-<h1>Perfis <a href="{{ route('profiles.create') }}" class="btn btn-dark"><i class="fas fa-plus"></i></a>
+<h1>Permissões do perfil <strong>{{ $profile->name }}</strong> 
+    {{-- <a href="{{ route('profiles.create') }}" class="btn btn-dark"><i class="fas fa-plus"></i>
+    </a> --}}
 </h1>
 @endsection
 
@@ -31,17 +33,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($profiles as $profile)
+                @foreach($permissions as $permission)
                     <tr>
-                        <td>{{ $profile->name }}</td>
+                        <td>{{ $permission->name }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('profiles.edit', $profile->id) }}"
+                                <a href="{{ route('permissions.edit', $permission->id) }}"
                                     class="btn btn-info">Editar</a>
-                                <a href="{{ route('profiles.show', $profile->id) }}"
-                                    class="btn btn-warning">Ver</a>
-                                    <a href="{{ route('profiles.permissions', $profile->id) }}"
-                                        class="btn btn-warning"><i class="fas fa-lock"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -51,9 +49,9 @@
     </div>
     <div class="card-footer">
         @if(isset($filters))
-            {{ $profiles->appends($filters)->links() }}
+            {{ $permissions->appends($filters)->links() }}
         @else
-            {{ $profiles->links() }}
+            {{ $permissions->links() }}
         @endif
     </div>
 </div>
