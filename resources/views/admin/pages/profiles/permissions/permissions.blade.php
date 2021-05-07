@@ -9,8 +9,8 @@
 </ol>
 
 <h1>Permissões do perfil <strong>{{ $profile->name }}</strong> 
-    {{-- <a href="{{ route('profiles.create') }}" class="btn btn-dark"><i class="fas fa-plus"></i>
-    </a> --}}
+    <a href="{{ route('profiles.permissions.avaliable', $profile->id) }}" class="btn btn-dark"><i class="fas fa-plus"></i>
+    </a>
 </h1>
 @endsection
 

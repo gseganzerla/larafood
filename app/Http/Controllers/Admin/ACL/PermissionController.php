@@ -51,7 +51,7 @@ class PermissionController extends Controller
     {
         $this->repository->create($request->all());
 
-        return redirect()->route('admin.pages.permissions.index');
+        return redirect()->route('permissions.index');
     }
 
     /**
