@@ -19,8 +19,12 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
+    // Routes Permissions
+    Route::any('permissions/search', 'ACL\PermissionController@search')->name('permissions.search');
+    Route::resource('permissions', 'ACL\PermissionController');
+
     // Routes Profiles
-    Route::any('profiles/search', 'ACL\ProfileController@search')->name('profile.search');
+    Route::any('profiles/search', 'ACL\ProfileController@search')->name('profiles.search');
     Route::resource('profiles', 'ACL\ProfileController');
 
     // Route Details Plan
