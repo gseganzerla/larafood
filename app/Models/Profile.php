@@ -8,22 +8,27 @@ class Profile extends Model
 {
     protected $fillable = ['name', 'description'];
 
-    public function permissions() 
+    public function permissions()
     {
         return $this->belongsToMany(Permission::class);
     }
 
     // Permission not linked with this profile
-    public function permissionsAvaliable() 
-    {   
+    public function permissionsAvaliable($filter = null)
+    {
         $this->id;
 
-        $permissions = Permission::whereNotIn('id', function($query){
+        $permissions = Permission::whereNotIn('permissions.id', function ($query) {
             $query->select('permission_profile.permission_id');
             $query->from('permission_profile');
             $query->whereRaw("permission_profile.profile_id={$this->id}");
         })
-        ->paginate();
+        ->where(function ($query) use ($filter){
+            if ($filter) {
+                $query->where('permissions.name', 'LIKE', "%{$filter}%");
+            }
+        })
+            ->paginate();
 
         return $permissions;
     }

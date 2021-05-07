@@ -19,7 +19,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <form action="{{ route('profiles.search') }}" method="post" class="form form-inline">
+        <form action="{{ route('profiles.permissions.avaliable', $profile->id) }}" method="post" class="form form-inline">
             @csrf
             <input type="text" class="form-control" name="filter" planceholder="Filtro"
                 value="{{ $filters['filter'] ?? '' }}">

@@ -51,7 +51,7 @@ class ProfileController extends Controller
     {
         $this->repository->create($request->all());
 
-        return redirect()->route('admin.pages.profiles.index');
+        return redirect()->route('profiles.index');
     }
 
     /**
