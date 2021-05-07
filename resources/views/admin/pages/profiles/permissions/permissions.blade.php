@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', "Permissões do perfil {$profile->name}")
+@section('title', "Permissões do perfil {{ $profile->name }}")
 
 @section('content_header')
 <ol class="breadcrumb">
