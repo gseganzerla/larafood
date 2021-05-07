@@ -16,20 +16,12 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">
-        <form action="{{ route('profiles.search') }}" method="post" class="form form-inline">
-            @csrf
-            <input type="text" class="form-control" name="filter" planceholder="Filtro"
-                value="{{ $filters['filter'] ?? '' }}">
-            <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
     <div class="card-body">
         <table class="table table-condensed">
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th width="150px">Ações</th>
+                    <th width="50px">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,8 +30,8 @@
                         <td>{{ $permission->name }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('permissions.edit', $permission->id) }}"
-                                    class="btn btn-info">Editar</a>
+                                <a href="{{ route('profiles.permission.detach', [$profile->id, $permission->id]) }}"
+                                    class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </div>
                         </td>
                     </tr>
