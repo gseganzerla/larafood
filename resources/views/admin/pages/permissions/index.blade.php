@@ -42,6 +42,8 @@
                                     class="btn btn-info">Editar</a>
                                 <a href="{{ route('permissions.show', $permission->id) }}"
                                     class="btn btn-warning">Ver</a>
+                                    <a href="{{ route('permission.profiles', $permission->id) }}"
+                                        class="btn btn-warning"><i class="fas fa-address-book"></i></a>
                             </div>
                         </td>
                     </tr>
