@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
     // Plan X profile
     Route::get('plans/{id}/profile/{idProfile}/detach', 'ACL\PlanProfileController@detachProfilePlan')->name('plans.profile.detach');
@@ -66,3 +67,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     // Home dashoard
     Route::get('', 'PlanController@create')->name('admin.index');
 });
+
+Auth::routes();
