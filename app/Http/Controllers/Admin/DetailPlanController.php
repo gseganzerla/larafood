@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdatePlan;
+use App\Http\Requests\StoreUpdateDetailPlan;
 use App\Models\DetailPlan;
 use App\Models\Plan;
-use Illuminate\Http\Request;
 
 class DetailPlanController extends Controller
 {
@@ -65,7 +64,7 @@ class DetailPlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdatePlan $request, $urlPlan)
+    public function store(StoreUpdateDetailPlan $request, $urlPlan)
     {
         $plan = $this->plan->where('url', $urlPlan)->first();
 
@@ -131,7 +130,7 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdatePlan $request, $urlPlan, $idDetail)
+    public function update(StoreUpdateDetailPlan $request, $urlPlan, $idDetail)
     {
         $plan = $this->plan->where('url', $urlPlan)->first();
         $detail = $this->repository->find($idDetail);
