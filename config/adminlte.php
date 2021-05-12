@@ -240,7 +240,7 @@ return [
             'icon' => 'fas fa-lock'
         ],
         [
-            'text' => 'Permissões',
+            'text' => 'Usuários',
             'url'  => 'admin/users',
             'icon' => 'fas fa-users'
         ],
