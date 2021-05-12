@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Site\\SiteController@index')->name('site.home');
+Route::group(['namespace' => 'Site'], function () {
+    Route::get('/', 'SiteController@index')->name('site.home');
+    Route::get('/plan/{url}', 'SiteController@plan')->name('plan.subscription');
+
+});
+
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 

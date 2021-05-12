@@ -8,15 +8,12 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
     /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
+    |-------------------------------------use Illuminate\Support\Str;ation of new users as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
@@ -49,11 +46,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return Validator::make($data, []);
     }
 
     /**
@@ -64,10 +57,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $plan = session('plan');
+
+        if (!$plan) {
+            return redirect()->route('site.home');
+        }
+
+        $tenant = $plan->tenants()->create([
+            'cnpj' => $data['cnpj'],
+            'name' => $data['tenent'],
+            'url' => Str::kebab_case($data['tenet']),
+            'email' => $data['email'],
+            'subscription' => now(),
+            'expires_at' => now()->addDays(7)
+        ]);
+
+        $user = $tenant->users()->create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password'])
         ]);
+
+        return $user;
     }
 }

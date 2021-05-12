@@ -18,4 +18,17 @@ class SiteController extends Controller
             'plans' => $plans
         ]);
     }
+
+    public function plan($url) 
+    {
+        $plan = Plan::where('url', $url)->first();
+
+        if (!$plan) {
+            return redirect()->back();
+        }
+
+        session()->put('plan', $plan);
+
+        return redirect()->route('register');
+    }
 }
