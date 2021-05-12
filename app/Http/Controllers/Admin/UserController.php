@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->paginate();
+        $users = $this->repository->lastest()->tenantUser()->paginate();
 
         return view('admin.pages.users.index', [
             'users' => $users
@@ -66,7 +66,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
+        $user = $this->repository->tenantUser()->find($id);
 
         if (!$user) {
             return redirect()->back();
@@ -85,7 +85,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->repository->find($id);
+        $user = $this->repository->tenantUser()->find($id);
 
         if (!$user) {
             return redirect()->back();
@@ -105,7 +105,7 @@ class UserController extends Controller
      */
     public function update(StoreUpdateUser $request, $id)
     {
-        $user = $this->repository->find($id);
+        $user = $this->repository->tenantUser()->find($id);
 
         if (!$user) {
             return redirect()->back();
@@ -129,7 +129,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = $this->repository->find($id);
+        $user = $this->repository->tenantUser()->find($id);
 
         if (!$user) {
             return redirect()->back();
@@ -152,6 +152,8 @@ class UserController extends Controller
                         ->orWhere('email', $request->filter);
                 }
             })
+            ->lastest()
+            ->tenantUser()
             ->paginate();
 
         return view('admin.pages.users.index', [
