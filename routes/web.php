@@ -23,6 +23,10 @@ Route::group(['namespace' => 'Site'], function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
+    // Users
+    Route::any('users/search', 'UserController@search')->name('profiles.search');
+    Route::resource('users', 'UserController');
+
     // Plan X profile
     Route::get('plans/{id}/profile/{idProfile}/detach', 'ACL\PlanProfileController@detachProfilePlan')->name('plans.profile.detach');
     Route::post('plans/{id}/profiles', 'ACL\PlanProfileController@attachProfilesPlan')->name('plans.profiles.attach');
