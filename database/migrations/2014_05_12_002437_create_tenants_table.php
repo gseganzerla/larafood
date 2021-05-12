@@ -30,6 +30,7 @@ class CreateTenantsTable extends Migration
             $table->boolean('subscription_suspended')->default(false);
 
             $table->foreign('plan_id')->references('id')->on('plans');
+            $table->uuid('uuid');
             $table->timestamps();
         });
     }

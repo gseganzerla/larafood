@@ -21,8 +21,8 @@
 
         {{-- Name field --}}
         <div class="input-group mb-3">
-            <input type="text" name="tenent" class="form-control {{ $errors->has('empresa') ? 'is-invalid' : '' }}"
-                   value="{{ old('tenent') }}" placeholder="Empresa" autofocus>
+            <input type="text" name="tenant" class="form-control {{ $errors->has('empresa') ? 'is-invalid' : '' }}"
+                   value="{{ old('tenant') }}" placeholder="Empresa" autofocus>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
