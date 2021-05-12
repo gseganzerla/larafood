@@ -14,7 +14,7 @@ class Profile extends Model
     }
 
     // Permission not linked with this profile
-    public function permissionsAvaliable($filter = null)
+    public function permissionsAvailable($filter = null)
     {
         $this->id;
 
@@ -31,5 +31,10 @@ class Profile extends Model
             ->paginate();
 
         return $permissions;
+    }
+
+    public function plans() 
+    {
+        return $this->belongsToMany(Plan::class);
     }
 }
