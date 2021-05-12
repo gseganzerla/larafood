@@ -22,7 +22,7 @@
             </li>
         </ul>
 
-        <form action="{{ route('users.destroy', $user->url) }}" method="POST">
+        <form action="{{ route('users.destroy', $user->id) }}" method="POST">
             @csrf
             @method('DELETE')
 

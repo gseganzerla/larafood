@@ -51,6 +51,7 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['tenant_id'] = auth()->user()->tenant_id;
+        $data['password'] = bcrypt($data['password']);
 
         $this->repository->create($data);
 
@@ -110,9 +111,14 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $user->update($request->all());
+        $data = $request->only(['name', 'email']);
+        if ($request->passwords) {
+            $data['password'] = bcrypt($request->passwords);
+        }
 
-        return redirect()->route('admin.pages.users.index');
+        $user->update($data);
+
+        return redirect()->route('users.index');
     }
 
     /**
