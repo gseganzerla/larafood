@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Detalhes do Usuario')
+@section('title', 'Detalhes da categoria')
 
 @section('content_header')
-<h1>Detalhes do Usuario <b>{{ $user->name }}</b></h1>
+<h1>Detalhes da categoria <b>{{ $category->name }}</b></h1>
 @endsection
 
 @section('content')
@@ -12,17 +12,17 @@
         @include('admin.includes.alerts')
         <ul>
             <li>
-                <strong>Nome: </strong> {{ $user->name }}
+                <strong>Nome: </strong> {{ $category->name }}
             </li>
             <li>
-                <strong>Email: </strong> {{ $user->email }}
+                <strong>Url: </strong> {{ $category->url }}
             </li>
             <li>
-                <strong>Empresa: </strong> {{ $user->tenant->name }}
+                <strong>Description: </strong> {{ $category->description }}
             </li>
         </ul>
 
-        <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+        <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
             @csrf
             @method('DELETE')
 

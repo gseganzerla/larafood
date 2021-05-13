@@ -3,7 +3,7 @@
 <div class="form-group">
     <label>Nome:</label>
     <input type="text" class="form-control" name="name" placeholder="Nome:"
-        value="{{ $user->name ?? old('name') }}">
+        value="{{ $category->name ?? old('name') }}">
 </div>
 <div class="form-group">
     <label>Descrição:</label>
