@@ -23,6 +23,10 @@ Route::group(['namespace' => 'Site'], function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
+    // Categories
+    Route::any('categories/search', 'CategoryController@search')->name('categories.search');
+    Route::resource('categories', 'CategoryController');
+
     // Users
     Route::any('users/search', 'UserController@search')->name('users.search');
     Route::resource('users', 'UserController');
