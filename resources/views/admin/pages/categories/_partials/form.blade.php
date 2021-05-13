@@ -6,14 +6,8 @@
         value="{{ $user->name ?? old('name') }}">
 </div>
 <div class="form-group">
-    <label>Email:</label>
-    <input type="email" class="form-control" name="email" placeholder="Email:"
-        value="{{ $user->email ?? old('email') }}">
-</div>
-<div class="form-group">
-    <label>Senha:</label>
-    <input type="password" class="form-control" name="password" placeholder="Senha:"
-        value="">
+    <label>Descrição:</label>
+    <textarea name="description" cols="30" rows="10" class="form-control">{{ $category->description ?? old('description') }}</textarea>
 </div>
 <div class="form-group">
     <button type="submit" class="btn btn-dark">Enviar</button>
