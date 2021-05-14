@@ -22,6 +22,9 @@ Route::group(['namespace' => 'Site'], function () {
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+    //Produtos
+    Route::any('products/search', 'ProductController@search')->name('products.search');
+    Route::resource('products', 'ProductController');
 
     // Categories
     Route::any('categories/search', 'CategoryController@search')->name('categories.search');

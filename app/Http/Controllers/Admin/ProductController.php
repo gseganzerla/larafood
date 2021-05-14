@@ -23,10 +23,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $categories = $this->repository->latest()->paginate();
+        $products = $this->repository->latest()->paginate();
 
-        return view('admin.pages.categories.index', [
-            'categories' => $categories
+        return view('admin.pages.products.index', [
+            'products' => $products
         ]);
     }
 
@@ -37,7 +37,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.categories.create');
+        return view('admin.pages.products.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class ProductController extends Controller
 
         $this->repository->create($data);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -75,13 +75,13 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.pages.categories.show', [
-            'category' => $product
+        return view('admin.pages.products.show', [
+            'product' => $product
         ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form forcategoryediting the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -94,8 +94,8 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.pages.categories.edit', [
-            'category' => $product
+        return view('admin.pages.products.edit', [
+            'product' => $product
         ]);
     }
 
@@ -124,7 +124,7 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -143,14 +143,14 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('categories.index');
+        return redirect()->route('products.index');
     }
 
     public function search(Request $request)
     {
         $filters = $request->only('filter');
 
-        $categories = $this->repository
+        $products = $this->repository
             ->where(function ($query) use ($request) {
                 if ($request->filter) {
 
@@ -161,8 +161,8 @@ class ProductController extends Controller
             ->lastest()
             ->paginate();
 
-        return view('admin.pages.categories.index', [
-            'categories' => $categories,
+        return view('admin.pages.products.index', [
+            'products' => $products,
             'filters' => $filters
         ]);
     }
