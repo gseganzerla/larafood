@@ -17,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Site'], function () {
     Route::get('/', 'SiteController@index')->name('site.home');
     Route::get('/plan/{url}', 'SiteController@plan')->name('plan.subscription');
-
 });
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
-    
+
+    Route::get('test-acl', function () {
+        return auth()->user()->permissions();
+    });
+
     //Produtos
     Route::any('tables/search', 'TableController@search')->name('tables.search');
     Route::resource('tables', 'TableController');
@@ -33,8 +36,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::any('products/{id}/categories/create', 'CategoryProductController@categoriesAvailable')->name('products.categories.available');
     Route::get('products/{id}/categories', 'CategoryProductController@categories')->name('products.categories');
     Route::get('categories/{id}/products', 'CategoryProductController@products')->name('categories.products');
-    
-    
+
+
     //Produtos
     Route::any('products/search', 'ProductController@search')->name('products.search');
     Route::resource('products', 'ProductController');
@@ -53,16 +56,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::any('plans/{id}/profiles/create', 'ACL\PlanProfileController@profilesAvailable')->name('plans.profiles.available');
     Route::get('plans/{id}/profiles', 'ACL\PlanProfileController@profiles')->name('plans.profiles');
     Route::get('profiles/{id}/plans', 'ACL\PlanProfileController@plans')->name('profiles.plans');
-    
+
 
 
     //Permission X Profile
     Route::get('profiles/{id}/permission/{idPermission}', 'ACL\PermissionProfileController@detachPermissionProfile')->name('profiles.permission.detach');
     Route::post('profiles/{id}/permissions', 'ACL\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
-    Route::any('profiles/{id}/permissions/create', 'ACL\PermissionProfileController@permissionsAvaliable')->name('profiles.permissions.avaliable');
+    Route::any('profiles/{id}/permissions/create', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.avaliable');
     Route::get('profiles/{id}/permissions', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
     Route::get('permission/{id}/profiles', 'ACL\PermissionProfileController@profiles')->name('permission.profiles');
-    
+
 
     // Routes Permissions
     Route::any('permissions/search', 'ACL\PermissionController@search')->name('permissions.search');
