@@ -22,9 +22,6 @@ Route::group(['namespace' => 'Site'], function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
-    Route::get('test-acl', function () {
-        return auth()->user()->isAdmin();
-    });
 
     //Produtos
     Route::any('tables/search', 'TableController@search')->name('tables.search');

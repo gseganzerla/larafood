@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->lastest()->tenantUser()->paginate();
+        $users = $this->repository->latest()->tenantUser()->paginate();
 
         return view('admin.pages.users.index', [
             'users' => $users
