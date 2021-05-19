@@ -109,7 +109,7 @@ class PermissionController extends Controller
 
         $permission->update($request->all());
 
-        return redirect()->route('admin.pages.permissions.index');
+        return redirect()->route('permissions.index');
     }
 
     /**
