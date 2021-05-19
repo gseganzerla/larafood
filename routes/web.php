@@ -23,7 +23,7 @@ Route::group(['namespace' => 'Site'], function () {
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
     Route::get('test-acl', function () {
-        return auth()->user()->permissions();
+        return auth()->user()->isAdmin();
     });
 
     //Produtos
