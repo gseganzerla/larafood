@@ -141,11 +141,10 @@ class TableController extends Controller
             ->where(function ($query) use ($request) {
                 if ($request->filter) {
 
-                    $query->orWhere('description', 'LIKE', "%{$request->filter}%")
-                        ->orWhere('name', $request->filter);
+                    $query->orWhere('name', $request->filter);
                 }
             })
-            ->lastest()
+            ->latest()
             ->paginate();
 
         return view('admin.pages.tables.index', [
