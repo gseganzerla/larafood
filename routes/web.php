@@ -22,6 +22,14 @@ Route::group(['namespace' => 'Site'], function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
+
+    //Permission X Role
+    Route::get('roles/{id}/permission/{idPermission}', 'ACL\PermissionRoleController@detachPermissionRole')->name('roles.permission.detach');
+    Route::post('roles/{id}/permissions', 'ACL\PermissionRoleController@attachPermissionsRole')->name('roles.permissions.attach');
+    Route::any('roles/{id}/permissions/create', 'ACL\PermissionRoleController@permissionsAvailable')->name('roles.permissions.avaliable');
+    Route::get('roles/{id}/permissions', 'ACL\PermissionRoleController@permissions')->name('roles.permissions');
+    Route::get('permission/{id}/roles', 'ACL\PermissionRoleController@roles')->name('permission.roles');
+
     // Roles
     Route::any('roles/search', 'ACL\RoleController@search')->name('roles.search');
     Route::resource('roles', 'ACL\RoleController');

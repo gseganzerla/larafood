@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', "Permissões do perfil {{ $profile->name }}")
+@section('title', "Permissões do perfil {{ $role->name }}")
 
 @section('content_header')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active"><a href="{{ route('profiles.index') }}">Perfis</a></li>
+    <li class="breadcrumb-item active"><a href="{{ route('roles.index') }}">Perfis</a></li>
 </ol>
 
-<h1>Permissões do perfil <strong>{{ $profile->name }}</strong> 
-    <a href="{{ route('profiles.permissions.avaliable', $profile->id) }}" class="btn btn-dark"><i class="fas fa-plus"></i>
+<h1>Permissões do perfil <strong>{{ $role->name }}</strong> 
+    <a href="{{ route('roles.permissions.avaliable', $role->id) }}" class="btn btn-dark"><i class="fas fa-plus"></i>
     </a>
 </h1>
 @endsection
@@ -30,7 +30,7 @@
                         <td>{{ $permission->name }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('profiles.permission.detach', [$profile->id, $permission->id]) }}"
+                                <a href="{{ route('roles.permission.detach', [$role->id, $permission->id]) }}"
                                     class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </div>
                         </td>
