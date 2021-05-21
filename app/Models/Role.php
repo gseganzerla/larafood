@@ -8,9 +8,14 @@ class Role extends Model
 {
     protected $fillable = ['name', 'description'];
 
-    public function permissions() 
+    public function permissions()
     {
         return $this->belongsToMany(Permission::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
     public function permissionsAvailable($filter = null)
@@ -22,11 +27,11 @@ class Role extends Model
             $query->from('permission_role');
             $query->whereRaw("permission_role.role_id={$this->id}");
         })
-        ->where(function ($query) use ($filter){
-            if ($filter) {
-                $query->where('permissions.name', 'LIKE', "%{$filter}%");
-            }
-        })
+            ->where(function ($query) use ($filter) {
+                if ($filter) {
+                    $query->where('permissions.name', 'LIKE', "%{$filter}%");
+                }
+            })
             ->paginate();
 
         return $permissions;
