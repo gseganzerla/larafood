@@ -22,6 +22,9 @@ Route::group(['namespace' => 'Site'], function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
+    // Roles
+    Route::any('roles/search', 'ACL\RoleController@search')->name('roles.search');
+    Route::resource('roles', 'ACL\RoleController');
 
     // Tenants
     Route::any('tenants/search', 'TenantController@search')->name('tenants.search');
