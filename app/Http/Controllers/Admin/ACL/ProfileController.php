@@ -111,7 +111,7 @@ class ProfileController extends Controller
 
         $profile->update($request->all());
 
-        return redirect()->route('admin.pages.profiles.index');
+        return redirect()->route('profiles.index');
     }
 
     /**
