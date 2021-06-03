@@ -17,6 +17,10 @@ class CreateTablesTable extends Migration
             $table->bigIncrements('id');
             $table->string('identify');
             $table->string('description')->nullable();
+
+            $table->unsignedBigInteger('tenant_id');
+            $table->foreign('tenant_id')->references('id')->on('tables')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
