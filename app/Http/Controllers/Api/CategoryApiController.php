@@ -27,4 +27,11 @@ class CategoryApiController extends Controller
 
         return CategoryResource::collection($categories);
     }
+
+    public function show(TenantFormRequest $request, $url) 
+    {
+        $category = $this->categoryService->getCategoryByUrl($url);
+
+        return new CategoryResource($category);
+    }
 }
