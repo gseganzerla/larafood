@@ -14,3 +14,6 @@ Route::get('/tables', 'Api\\TableApiController@tablesByTenant');
 
 Route::get('/products/{flag}', 'Api\\ProductApiController@show');
 Route::get('/products', 'Api\\ProductApiController@productsByTenant');
+
+
+Route::post('/clients', 'Api\\Auth\\RegisterController@store');
