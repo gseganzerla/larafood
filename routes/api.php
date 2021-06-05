@@ -17,3 +17,4 @@ Route::get('/products', 'Api\\ProductApiController@productsByTenant');
 
 
 Route::post('/clients', 'Api\\Auth\\RegisterController@store');
+Route::post('/sanctum/token', 'Api\\Auth\\AuthClientController@auth');

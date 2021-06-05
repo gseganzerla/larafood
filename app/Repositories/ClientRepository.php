@@ -15,7 +15,9 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
     public function create(array $data) 
-    {
+    {   
+        $data['password'] = bcrypt($data['password']);
+        
         return $this->entity->create($data);
     }
 
