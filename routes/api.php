@@ -9,7 +9,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/tenants', 'TenantApiController@index');
 
 
-    Route::get('/categories/{url}', 'CategoryApiController@show');
+    Route::get('/categories/{identify}', 'CategoryApiController@show');
     Route::get('/categories', 'CategoryApiController@categoriesByTenant');
 
     Route::get('/tables/{identify}', 'TableApiController@show');

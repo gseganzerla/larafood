@@ -5,15 +5,17 @@ namespace App\Repositories;
 use App\Models\Table;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Contracts\TableRepositoryInterface;
+use App\Tenant\Scopes\TenantScope;
 
 class TableRepository  implements TableRepositoryInterface
 {
 
-    protected $table;
+    protected $table, $entity;
 
-    public function __construct()
+    public function __construct(Table $table)
     {
         $this->table = 'tables';
+        $this->entity = $table;
     }
 
     public function getTablesByTenantUuid(string $uuid)
@@ -31,10 +33,11 @@ class TableRepository  implements TableRepositoryInterface
         return DB::table($this->table)->where('tenant_id', $idTenant)->get();
     }
 
-    public function getTableByIdentify(string $identify)
+    public function getTableByUuid(string $uuid)
     {
-        return DB::table($this->table)
-            ->where('identify', $identify)
+        return $this->entity
+            ->withoutGlobalScope(TenantScope::class)
+            ->where('uuid', $uuid)
             ->first();
     }
 }

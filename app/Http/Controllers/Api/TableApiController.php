@@ -28,9 +28,9 @@ class TableApiController extends Controller
         return TableResource::collection($tables);
     }
 
-    public function show(TenantFormRequest $request, $url) 
+    public function show(TenantFormRequest $request, $uuid) 
     {
-        $table = $this->tableService->getTableByUrl($url);
+        $table = $this->tableService->getTableByUuid($uuid);
 
         return new TableResource($table);
     }
