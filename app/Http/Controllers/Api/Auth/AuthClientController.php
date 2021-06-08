@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthClientController extends Controller
 {
-    
-    public function auth(Request $request) 
+
+    public function auth(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -29,8 +30,19 @@ class AuthClientController extends Controller
         return response()->json(['token' =>  $token]);
     }
 
-    public function me(Request $request) 
+    public function me(Request $request)
     {
-        $request->user();
+        $client = $request->user();
+
+        return new ClientResource($client);
+    }
+
+    public function logout(Request $request)
+    {
+        $client = $request->user();
+
+        $client->token()->delete();
+
+        return response()->json([], 204);
     }
 }
