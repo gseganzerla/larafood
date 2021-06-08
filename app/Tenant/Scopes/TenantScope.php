@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class TenantScope implements Scope
 {
-    public function apply(Builder $builder, Model $model) 
+    public function apply(Builder $builder, Model $model)
     {
-        $managerTenant = app(ManagerTenant::class);
 
-        $builder->where('tenant_id', $managerTenant->getTenantIdentify());
+        $identify = $managerTenant = app(ManagerTenant::class);
+
+        if ($identify) {
+            $builder->where('tenant_id', $identify );
+        }
     }
 }
