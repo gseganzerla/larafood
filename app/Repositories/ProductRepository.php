@@ -5,15 +5,17 @@ namespace App\Repositories;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Tenant\Scopes\TenantScope;
 
 class ProductRepository  implements ProductRepositoryInterface
 {
 
-    protected $table;
+    protected $table, $entity;
 
-    public function __construct()
+    public function __construct(Product $product)
     {
         $this->table = 'products';
+        $this->entity = $product;
     }
 
     public function getProductsByTenantId(int $idTenant, $categories)
@@ -25,16 +27,18 @@ class ProductRepository  implements ProductRepositoryInterface
             ->where('categories.tenant_id', $idTenant)
             ->where(function ($query) use ($categories) {
                 if ($categories != []) {
-                    $query->whereIn('categories.url', $categories);
+                    $query->whereIn('categories.uuid', $categories);
                 }
             })
+            ->select('products.*')
             ->get();
     }
 
-    public function getProductByFlag(string $flag)
+    public function getProductByUuid(string $uuid)
     {
-        return DB::table($this->table)
-            ->where('flag', $flag)
+        return $this->entity
+            ->withoutGlobalScope(TenantScope::class)
+            ->where('uuid', $uuid)
             ->first();
     }
 }

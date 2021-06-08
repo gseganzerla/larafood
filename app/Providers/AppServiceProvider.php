@@ -12,6 +12,8 @@ use App\Observers\PlanObserver;
 use App\Observers\TenantObserver;
 use App\Observers\ProductObserver;
 use App\Observers\CategoryObserver;
+use App\Observers\ClientObserver;
+use App\Observers\TableObserver;
 use App\Repositories\TenantRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\TenantRepositoryInterface;
