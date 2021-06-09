@@ -22,7 +22,12 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/clients', 'Auth\\RegisterController@store');
 
     Route::post('/sanctum/token', 'Auth\\AuthClientController@auth');
+
+    Route::post('/orders', 'OrderApiController@store');
+    Route::get('/orders/{identify}', 'OrderApiController@show');
 });
+
+
 
 Route::group(['namespace' => 'Api', 'middleware' => ['auth:sanctum']], function (){
     Route::get('/auth/me', 'Auth\\AuthClientController@me');
