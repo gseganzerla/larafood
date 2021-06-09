@@ -38,7 +38,7 @@ class OrderService
             $tenantId,
             $comment,
             $clientId,
-            $tableId 
+            $tableId
         );
 
         return $order;
@@ -57,6 +57,10 @@ class OrderService
         $characters = $smallLetters . $numbers;
 
         $identify = substr(str_shuffle($characters), 0, $qtyCaracters);
+
+        if ($this->orderRepository->getOrderByIdentify($identify)) {
+            $this->getIdentifyOrder($qtyCaracters + 1);
+        }
 
         if ($this->orderRepository->getOrderByIdentify($identify)) {
             $this->getIdentifyOrder($qtyCaracters + 1);
