@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use TenantTrait;
+    // use TenantTrait;
 
-    protected $fillable = ['identify', 'client_id', 'total', 'status', 'comment', 'table_id'];
+    protected $fillable = ['tenant_id', 'identify', 'client_id', 'table_id', 'total', 'status', 'comment'];
 
     public function tenant()
     {

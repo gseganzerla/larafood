@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class TenantObserver
 {
+
     // Observer criado separadamente pois servira para mais de um proposito
     // Cadastar tenant_id em  Category ou User
-
     public function creating(Model $model)
     {
-        $identify =  $managerTenant = app(ManagerTenant::class);
+        $managerTenant = app(ManagerTenant::class);
+        $identify = $managerTenant->getTenantIdentify();
 
-        if ($identify) {
-            $model->tenant_id = $managerTenant->getTenantIdentify();
-        }
+        if ($identify)
+            $model->tenant_id = $identify;
     }
 }

@@ -11,7 +11,7 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function __construct(Order $order)
     {
-        $this->entity;
+        $this->entity = $order;
     }
 
     public function createNewOrder(
@@ -19,9 +19,25 @@ class OrderRepository implements OrderRepositoryInterface
         float $total,
         string $status,
         int $tenantId,
+        string $comment,
         $clientId = '',
         $tableId = ''
     ) {
+
+        $data = [
+            'identify' => $identify,
+            'total' => $total,
+            'status' => $status,
+            'tenant_id' => $tenantId,
+            'comment' => $comment
+        ];
+
+        if ($clientId) $data['client_id'] = $clientId;
+        if ($tableId) $data['table_id'] = $tableId;
+
+        $order = $this->entity->create($data);
+
+        return $order;
     }
     public function getOrderByIdentify(string $identify)
     {
