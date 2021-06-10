@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Order;
 use App\Repositories\Contracts\OrderRepositoryInterface;
-use Illuminate\Support\Facades\DB;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -65,5 +64,14 @@ class OrderRepository implements OrderRepositoryInterface
         $order->products()->attach($orderProducts);
 
         return $order;
+    }
+
+    public function getOrdersByClientId(int $idClient)
+    {
+        $orders = $this->entity
+            ->where('client_id', $idClient)
+            ->paginate();
+
+        return $orders;
     }
 }

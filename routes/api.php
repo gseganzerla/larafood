@@ -30,10 +30,12 @@ Route::group(['namespace' => 'Api'], function () {
 
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Api', 'middleware' => ['auth:sanctum']], function (){
-    Route::get('/me', 'Auth\\AuthClientController@me');
-    Route::get('/logout', 'Auth\\AuthClientController@logout');
+    Route::get('me', 'Auth\\AuthClientController@me');
+    Route::get('logout', 'Auth\\AuthClientController@logout');
 
     Route::post('orders', 'OrderApiController@store');
+
+    Route::get('my-orders', 'OrderApiController@myOrders');
 
 
 });
