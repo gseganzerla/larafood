@@ -37,5 +37,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Api', 'middleware' => ['auth:s
 
     Route::get('my-orders', 'OrderApiController@myOrders');
 
+    Route::post('orders/{identify}/evaluations', 'EvaluationApiController@store');
+
 
 });

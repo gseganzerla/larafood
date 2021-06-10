@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Evaluation extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['order_id', 'client_id', 'stars', 'comment'];
 
-    protected $table = 'order_evaluation';
+    protected $table = 'order_evaluations';
 
     public function order() 
     {
