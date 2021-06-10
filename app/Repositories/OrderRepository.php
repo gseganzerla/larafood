@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Order;
 use App\Repositories\Contracts\OrderRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -44,5 +45,25 @@ class OrderRepository implements OrderRepositoryInterface
         return $this->entity
             ->where('identify', $identify)
             ->first();
+    }
+
+    public function registerProductsOrder(int $orderId, array $products)
+    {
+        $orderProducts = [];
+
+        $order = $this->entity->find($orderId);
+
+        $orderProducts = [];
+
+        foreach ($products as $product) {
+            $orderProducts[$product['id']] = [
+                'quantity' => $product['quantity'],
+                'price' => $product['price']
+            ];
+        }
+
+        $order->products()->attach($orderProducts);
+
+        return $order;
     }
 }
