@@ -28,7 +28,6 @@ class ProductObserver
     public function updating(Product $product)
     {
         $product->flag = Str::kebab($product->title);
-        $product->uuid = Str::uuid();
     }
 
     /**

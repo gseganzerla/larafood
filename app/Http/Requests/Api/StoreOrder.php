@@ -29,7 +29,10 @@ class StoreOrder extends FormRequest
                 'exists:tenants,uuid'
             ],
             'table' => ['nullable', 'exists:tables,uuid'],
-            'comment' => ['nullable', 'max:1000']
+            'comment' => ['nullable', 'max:1000'],
+            'products' => ['required'],
+            'products.*.identify' => ['required', 'exists:products,uuid'],
+            'products.*.quantity' => ['required', 'integer']
         ];
     }
 }
