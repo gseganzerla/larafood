@@ -9,5 +9,15 @@ class Client extends Authenticatable
 {
     use HasApiTokens;
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'tenant_id'];
+
+    public function evaluations() 
+    {
+        return $this->hasMany(Evaluation::class);
+    }
+
+    public function orders() 
+    {
+        return $this->hasMany(Order::class);
+    }
 }
