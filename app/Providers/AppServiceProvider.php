@@ -2,21 +2,26 @@
 
 namespace App\Providers;
 
-use App\Models\Plan;
-use App\Models\Tenant;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\Client;
-use App\Models\Table;
-use App\Observers\PlanObserver;
-use App\Observers\TenantObserver;
-use App\Observers\ProductObserver;
-use App\Observers\CategoryObserver;
-use App\Observers\ClientObserver;
-use App\Observers\TableObserver;
-use App\Repositories\TenantRepository;
+use App\Models\{
+    Plan,
+    Tenant,
+    Product,
+    Category,
+    Client,
+    Table
+};
+use App\Observers\{
+    PlanObserver,
+    TenantObserver,
+    ProductObserver,
+    CategoryObserver,
+    ClientObserver,
+    TableObserver
+};
+
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Contracts\TenantRepositoryInterface;
+use Faker\Generator;
+use Faker\Factory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,7 +32,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(Generator::class, function () {
+            return Factory::create('pt_BR');
+        });
     }
 
     /**
