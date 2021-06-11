@@ -15,12 +15,12 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function testGetAllCategoriesTenantError()
-    {
-        $response = $this->getJson('/api/categories');
+    // public function testGetAllCategoriesTenantError()
+    // {
+    //     $response = $this->getJson('/api/categories');
 
-        $response->assertStatus(422);
-    }
+    //     $response->assertStatus(422); sla
+    // }
 
     /**
      * Get Categories by Tenant
