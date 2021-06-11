@@ -19,7 +19,7 @@ class CategoryTest extends TestCase
     // {
     //     $response = $this->getJson('/api/categories');
 
-    //     $response->assertStatus(422); sla
+    //     $response->assertStatus(true); sla
     // }
 
     /**
