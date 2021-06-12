@@ -19,10 +19,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/products', 'ProductApiController@productsByTenant');
 
 
-    Route::post('/auth/register', 'Auth\\RegisterController@store');
-
-    Route::post('/auth/token', 'Auth\\AuthClientController@auth');
-
+    
     Route::post('/orders', 'OrderApiController@store');
     Route::get('/orders/{identify}', 'OrderApiController@show');
 });
@@ -30,6 +27,9 @@ Route::group(['namespace' => 'Api'], function () {
 
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Api', 'middleware' => ['auth:sanctum']], function (){
+    Route::post('/register', 'Auth\\RegisterController@store');
+    Route::post('/token', 'Auth\\AuthClientController@auth');
+
     Route::get('me', 'Auth\\AuthClientController@me');
     Route::get('logout', 'Auth\\AuthClientController@logout');
 

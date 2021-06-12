@@ -22,7 +22,7 @@ class AuthClientController extends Controller
         $client = Client::where('email', $request->email)->first();
 
         if (!$client || !Hash::check($request->password, $client->password)) {
-            return response()->json(['message' => 'Credentials are invalid'], 404);
+            return response()->json(['message' => trans('auth.failed')], 404);
         }
 
         $token = $client->createToken($request->device_name)->plainTextToken;
