@@ -152,4 +152,21 @@ class TableController extends Controller
             'filters' => $filters
         ]);
     }
+
+    public function qrcode($id)
+    {
+        $table = $this->repository->find($id);
+
+        if (!$table) {
+            return redirect()->back();
+        }
+
+        $tenant = auth()->user()->tenant;
+
+        $uri = env('URI_CLIENT') . "/{$tenant->uuid}/{$table->id}";
+
+        return view('admin.pages.tables.qrcode', [
+            'uri' => $uri
+        ]);
+    }
 }

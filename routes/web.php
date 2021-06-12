@@ -46,7 +46,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::any('tenants/search', 'TenantController@search')->name('tenants.search');
     Route::resource('tenants', 'TenantController');
 
-    //Produtos
+    //Produto
+    Route::get('tables/qrcode/{id}', 'TableController@qrcode')->name('tables.qrcode');
     Route::any('tables/search', 'TableController@search')->name('tables.search');
     Route::resource('tables', 'TableController');
 
