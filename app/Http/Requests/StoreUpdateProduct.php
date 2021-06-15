@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Tenant\Rules\UniqueTenant;
+use App\Rules\UniqueTenant;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUpdateProduct extends FormRequest
@@ -31,7 +31,7 @@ class StoreUpdateProduct extends FormRequest
                 'required',
                 'min:3',
                 'max:255',
-                "unique:products,title,{$id},id"
+                new UniqueTenant('products', $id)
             ],
             'description' => ['required', 'min:3', 'max:500'],
             'image' => ['required', 'image'],
